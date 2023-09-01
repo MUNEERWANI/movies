@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
     <Container className="mt-4">
       <Row xs={1} sm={2} lg={4}>
         {popularMovies.map((movie) => (
+        <Link key={movie.id} to={`/movie/${movie.id}`}>
           <Col key={movie.id}>
             <Cards
               title={movie.title}
@@ -30,6 +32,7 @@ const Home = () => {
               rating={movie.vote_average}
             />
           </Col>
+          </Link>
         ))}
       </Row>
     </Container>

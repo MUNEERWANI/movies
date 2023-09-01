@@ -1,9 +1,10 @@
-import Home from "./components/home/Home";
-import Header from "./components/navigation/Header";
 import {Routes, Route } from "react-router";
 import TopRatedMoviesPage from "./pages/TopRatedMoviesPage";
 import UpComingMoviesPage from "./pages/UpComingMoviesPage";
-import SearchedMovies from "./components/searched-movies/SearchedMovies";
+import SearchedMovies from "./components/SearchedMovies/SearchedMovies";
+import MovieDetails from "./components/SingleMovieDetails/MovieDetails";
+import HomePage from "./pages/HomePage";
+import Header from './components/Navigation/Header'
 
 
 function App() {
@@ -11,11 +12,11 @@ function App() {
       <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<HomePage />}/>
         <Route path="/top-rated" element={<TopRatedMoviesPage />}/>
         <Route path="/upcoming" element={<UpComingMoviesPage />}/>
-        <Route path="/searched" element={<SearchedMovies />} />
-
+        <Route path="/searched/:movieName" element={<SearchedMovies />} />
+        <Route path="/movie/:movieId" element={<MovieDetails />} />
       </Routes>
       </div>
       );

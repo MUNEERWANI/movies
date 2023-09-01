@@ -5,22 +5,19 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { fetchSearchedMovies } from '../../store/searchMoviesSlice';
 import { useNavigate } from 'react-router-dom';
+import './header.css';
 
 const Header = () => {
   const [searchTerm,setSearchTerm]=  useState('');
-  const dispatch=useDispatch();
   const navigate=useNavigate();
   const searchHandler=()=>{
-    dispatch(fetchSearchedMovies(searchTerm));
-    navigate('/searched');
+    navigate(`/searched/${searchTerm}`);
   }
   return (
     <Navbar expand="lg" bg="dark" data-bs-theme="dark">
       <Container fluid>
-        <Navbar.Brand as={Link} to='/'>Movies Db</Navbar.Brand>
+        <Navbar.Brand as={Link} to='/' className="ms-auto my-brand">Movies Db</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

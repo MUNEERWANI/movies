@@ -1,5 +1,5 @@
 import React from 'react'
-import Upcoming from '../components/upcoming-movies/Upcoming'
+import Upcoming from '../components/UpcomingMovies/Upcoming'
 
 const UpComingMoviesPage = () => {
   return (

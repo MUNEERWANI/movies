@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
 const TopRatedMovies = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const TopRatedMovies = () => {
     <Container className="mt-4">
       <Row xs={1} sm={2} lg={4}>
         {topRatedMovies.map((movie) => (
+        <Link key={movie.id} to={`/movie/${movie.id}`}>
           <Col key={movie.id}>
             <Cards
               title={movie.title}
@@ -27,6 +29,7 @@ const TopRatedMovies = () => {
               rating={movie.vote_average}
             />
           </Col>
+          </Link>
         ))}
       </Row>
     </Container>

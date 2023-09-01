@@ -7,22 +7,23 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
 const Upcoming = () => {
   const dispatch = useDispatch();
     const upcomingMovies = useSelector((state) => state.upcoming.upcomingMovies);
     console.log(upcomingMovies)
   
-   
     useEffect(() => {
       dispatch(fetchUpcomingMovies());
     }, [dispatch]);
 
   return (
-    <div>
-      <Container className="mt-4">
+    
+       <Container className="mt-4">
       <Row xs={1} sm={2} lg={4}>
         {upcomingMovies.map((movie) => (
+        <Link key={movie.id} to={`/movie/${movie.id}`}>
           <Col key={movie.id}>
             <Cards
               title={movie.title}
@@ -30,10 +31,11 @@ const Upcoming = () => {
               rating={movie.vote_average}
             />
           </Col>
+          </Link>
         ))}
       </Row>
     </Container>
-    </div>
+    
   )
 }
 
