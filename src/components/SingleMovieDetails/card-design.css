@@ -1,0 +1,49 @@
+/* card-design.css */
+.card-design {
+    position: relative;
+    background-color: transparent;
+  }
+  
+  .card-design .overlay-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+  
+  .card-design .details-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    border: none;
+    margin-left: 20px; /* Adjust the margin as needed */
+  }
+  
+  .card-design .details-card .card-body {
+    padding: 1rem;
+  }
+  
+  .card-design .details-card .card-title {
+    font-size: 1.5rem;
+  }
+  
+  .card-design .details-card .card-text {
+    font-size: 1rem;
+  }
+  
+  .card-design .details-card .overview {
+    font-size: 1rem;
+  }
+  
+  /* You can add more styles as needed */
+  
+  /* Media query for responsiveness */
+  @media (max-width: 768px) {
+    .card-design .details-card {
+      margin-left: 0; /* Adjust the margin for smaller screens */
+    }
+  }
+  
