@@ -2,13 +2,13 @@ import React from "react";
 import Cards from "../Card/Card";
 import Container from "react-bootstrap/esm/Container";
 import { useDispatch } from "react-redux";
-import { fetchPopularMovies } from "../../store/moviesSlice";
+import { fetchPopularMovies,setCurrentPage  } from "../../store/moviesSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useLocation } from "react-router-dom";
-import Pagination from "react-bootstrap/Pagination";
+import MyPagination from "../Pagination/MyPagination";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,12 +16,11 @@ const Home = () => {
   console.log(popularMovies);
 
   const searchParams = new URLSearchParams(useLocation().search);
-  const currentPage = parseInt(searchParams.get("page")) || 1;
-
-  // const [totalPages, setTotalPages] = useState(1);
+  let currentPage = parseInt(searchParams.get("page")) || 1;
   const totalPages = useSelector((state) => state.movies.totalPages);
-  console.log(totalPages)
 
+  const currentPagee = useSelector((state) => state.movies.currentPage);
+  console.log(currentPagee)
 
 
   useEffect(() => {
@@ -32,12 +31,35 @@ const Home = () => {
     const searchParams = new URLSearchParams();
     searchParams.set("page", newPage);
     window.history.replaceState({}, "", `?${searchParams.toString()}`);
-
+    dispatch(setCurrentPage(newPage));
+    currentPage = newPage;
     dispatch(fetchPopularMovies(newPage));
   };
+  const handlePrevClick = () => {
+    if (currentPagee > 1) {
+      const newPage = currentPagee- 1;
+
+      console.log(newPage,currentPagee,currentPage)
+      dispatch(setCurrentPage(newPage));
+      handlePageChange(newPage)
+      // dispatch(fetchPopularMovies(newPage));
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentPagee < totalPages) {
+      const newPage = currentPagee +1;
+      console.log(newPage,currentPagee,totalPages)
+ 
+      dispatch(setCurrentPage(newPage));
+      handlePageChange(newPage)
+
+    }
+  };
+ 
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4" >
       <Row xs={1} sm={2} lg={4}>
         {popularMovies.map((movie) => (
           <Link key={movie.id} to={`/movie/${movie.id}`}>
@@ -51,17 +73,12 @@ const Home = () => {
           </Link>
         ))}
       </Row>
-      <Pagination className="justify-content-center mt-4">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <Pagination.Item
-            key={index}
-            active={index + 1 === currentPage}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </Pagination.Item>
-        ))}
-      </Pagination>
+      <MyPagination 
+      currentPage={currentPagee}
+      totalPages={totalPages}
+      onPageChange={handlePageChange}
+      onPrevClick={handlePrevClick}
+      onNextClick={handleNextClick}/>
     </Container>
   );
 };

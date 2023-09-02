@@ -7,7 +7,7 @@ const API_KEY='c45a857c193f6302f2b5061c3b85e743';
 
 export const fetchPopularMovies=createAsyncThunk(
     'movies/fetchPopularMovies',
-    async (page = 1)=>{
+    async (page=1)=>{
     const response =await axios.get(
         `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
     );
@@ -23,11 +23,15 @@ const initialState={
     popularMovies:[],
     movieDetails:[],
     totalPages: 0,
+    currentPage: 1,
 }
 export  const moviesSlice=createSlice({
     name:'movies',
     initialState:initialState,
     reducers:{
+        setCurrentPage: (state, action) => {
+            state.currentPage = action.payload;
+          },
 
     },
     extraReducers:(builder)=>{
@@ -38,4 +42,5 @@ export  const moviesSlice=createSlice({
     }
 
 })
+export const {setCurrentPage}=moviesSlice.actions;
 
