@@ -11,7 +11,7 @@ const CardDesign = (props) => {
 
   return (
     <Container>
-      <Row>
+      <Row  className="mb-3">
         <Col sm={4}>
           <Row>
             <Col>
@@ -27,10 +27,10 @@ const CardDesign = (props) => {
               <Card.Title>{props.title}</Card.Title>
               <Card.Text>Release Date {props.release}</Card.Text>
               <Card.Text>Rating {props.rating}</Card.Text>
-              <Card.Text>{props.runtime}</Card.Text>
+              <Card.Text>Length{props.runtime}</Card.Text>
             </Col>
           </Row>
-          <Row>
+          <Row className="mt-5">
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Overview</Accordion.Header>
@@ -40,7 +40,7 @@ const CardDesign = (props) => {
           </Row>
         </Col>
         <Col>
-          <Row>
+          <Row className="mt-5">
             <Image
               src={backDropUrl}
               className="img-fluid"

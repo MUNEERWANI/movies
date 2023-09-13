@@ -39,9 +39,9 @@ const MovieDetails = (props) => {
           backdropUrl={singleMovieDetail.backdrop_path}
         />
       )}
-      <Row xs={1} sm={3} lg={4}>
+       <Row xs={1} sm={1} md={2} lg={3} xxl={4} className="g-3 mb-4">
         {movieCastDetails.map((cast) => (
-          <Col key={cast.id}>
+          <Col key={cast.id} xs={12} sm={6} md={4} lg={3} xl={2} className="mx-auto mb-4">
             <CardForCast
               url={cast.profile_path}
               name={cast.original_name}

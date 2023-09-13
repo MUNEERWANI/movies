@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useLocation } from "react-router-dom";
 import MyPagination from "../Pagination/MyPagination";
+import { useCallback } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,14 +28,18 @@ const Home = () => {
     dispatch(fetchPopularMovies(currentPage));
   }, [dispatch, currentPage]);
 
-  const handlePageChange = (newPage) => {
-    const searchParams = new URLSearchParams();
-    searchParams.set("page", newPage);
-    window.history.replaceState({}, "", `?${searchParams.toString()}`);
-    dispatch(setCurrentPage(newPage));
-    currentPage = newPage;
-    dispatch(fetchPopularMovies(newPage));
-  };
+  const handlePageChange = useCallback(
+    (newPage) => {
+      const searchParams = new URLSearchParams();
+      searchParams.set("page", newPage);
+      window.history.replaceState({}, "", `?${searchParams.toString()}`);
+      dispatch(setCurrentPage(newPage));
+      currentPage = newPage;
+      dispatch(fetchPopularMovies(newPage));
+    },
+    [dispatch,currentPage]
+  );
+
   const handlePrevClick = () => {
     if (currentPagee > 1) {
       const newPage = currentPagee- 1;
@@ -59,18 +64,19 @@ const Home = () => {
  
 
   return (
-    <Container className="mt-4" >
-      <Row xs={1} sm={2} lg={4}>
+    <Container className="mt-4">
+      <Row xs={1} sm={2} lg={4} xxl={4} className="g-3 mb-4">
         {popularMovies.map((movie) => (
-          <Link key={movie.id} to={`/movie/${movie.id}`}>
-            <Col key={movie.id}>
+          <Col key={movie.id} className="mb-3">
+            <Link to={`/movie/${movie.id}`}>
               <Cards
                 title={movie.title}
                 url={movie.poster_path}
                 rating={movie.vote_average}
+                className="h-100"
               />
-            </Col>
-          </Link>
+            </Link>
+          </Col>
         ))}
       </Row>
       <MyPagination 

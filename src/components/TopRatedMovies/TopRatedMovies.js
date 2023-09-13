@@ -57,26 +57,26 @@ const TopRatedMovies = () => {
 
   return (
     <Container className="mt-4">
-      <Row xs={1} sm={2} lg={4}>
+      <Row xs={1} sm={2} md={3} lg={3} xxl={4} className="g-3 mb-4">
         {topRatedMovies.map((movie) => (
-          <Link key={movie.id} to={`/movie/${movie.id}`}>
-            <Col key={movie.id}>
+          <Col key={movie.id} className="mb-3 ">
+            <Link to={`/movie/${movie.id}`}>
               <Cards
                 title={movie.title}
                 url={movie.poster_path}
                 rating={movie.vote_average}
+                className="h-100"
               />
-            </Col>
-          </Link>
+            </Link>
+          </Col>
         ))}
       </Row>
-      <MyPagination
-        currentPage={currentPagee}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        onPrevClick={handlePrevClick}
-        onNextClick={handleNextClick}
-      />
+      <MyPagination 
+      currentPage={currentPagee}
+      totalPages={totalPages}
+      onPageChange={handlePageChange}
+      onPrevClick={handlePrevClick}
+      onNextClick={handleNextClick}/>
     </Container>
   );
 };
